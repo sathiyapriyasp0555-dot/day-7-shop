@@ -194,3 +194,5 @@ couponForm.addEventListener("submit", e => {
 
 // ----- first render -----
 render();
+// State is the source of truth. Event handlers update state and call render().
+// render() redraws the products, summary, and cart from that state.
