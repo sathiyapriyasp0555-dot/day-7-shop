@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HomeCraft</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js"defer></script>
+</head>
+<body>
+  <header class="top">
+    <h1>HomeCraft</h1>
+    <span class="badge">Cart: <b id="cart-count">0</b></span>
+  </header>
+
+  <p class="summary" id="summary"></p>
+
+  <div class="controls">
+    <input id="search" type="search" placeholder="Search products">
+    <select id="sort">
+      <option value="default">Sort: default</option>
+      <option value="low">Price: low to high</option>
+      <option value="high">Price: high to low</option>
+    </select>
+  </div>
+
+  <div class="chips" id="chips">
+    <button class="chip active" data-cat="all">All</button>
+    <button class="chip" data-cat="living">Living</button>
+    <button class="chip" data-cat="dining">Dining</button>
+    <button class="chip" data-cat="decor">Decor</button>
+    <button class="chip" data-cat="study">Study</button>
+  </div>
+
+  <main class="layout">
+    <ul class="grid" id="grid"></ul>
+    <aside class="cart">
+      <h2>Your cart</h2>
+      <ul id="cart-list"></ul>
+      <p class="total">Total: <b id="cart-total">₹0</b></p>
+      <form id="coupon-form">
+        <input id="coupon" placeholder="Coupon code">
+        <button>Apply</button>
+      </form>
+      <p id="coupon-msg"></p>
+    </aside>
+  </main>
+</body>
+</html>

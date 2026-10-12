@@ -1,0 +1,29 @@
+* { box-sizing: border-box; }
+body { margin: 0; padding: 20px; font-family: system-ui, sans-serif; background: #f7f3ec; color: #2a1e16; }
+.top { display: flex; justify-content: space-between; align-items: center; }
+h1 { margin: 0; }
+.badge { background: #c2572b; color: #fff; padding: 4px 12px; border-radius: 999px; }
+.summary { margin: 14px 0; padding: 10px 14px; background: #fff; border-radius: 10px; }
+.controls { display: flex; gap: 8px; }
+.controls input { flex: 1; padding: 8px 12px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+.chip { border: 1px solid #ccc; background: #fff; border-radius: 999px; padding: 4px 14px; cursor: pointer; }
+.chip.active { background: #0f6e6e; color: #fff; border-color: #0f6e6e; }
+.layout { display: grid; grid-template-columns: 1fr 280px; gap: 16px; }
+@media (max-width: 700px) { .layout { grid-template-columns: 1fr; } }
+.grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; }
+.card { background: #fff; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 4px; }
+.card h3 { margin: 0; font-size: 17px; }
+.card .cat { margin: 0; font-size: 13px; color: #777; text-transform: capitalize; }
+.card .price { margin: 0; color: #c2572b; font-weight: 700; }
+.card .add { margin-top: auto; border: 0; background: #0f6e6e; color: #fff; border-radius: 8px; padding: 8px; cursor: pointer; }
+.card .add:disabled { background: #ccc; cursor: not-allowed; }
+.card.in-cart { outline: 2px solid #0f6e6e; }
+.empty { grid-column: 1 / -1; text-align: center; padding: 30px; color: #777; }
+.cart { background: #fff; border-radius: 12px; padding: 14px; align-self: start; }
+.cart ul { list-style: none; padding: 0; }
+.cart li { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #eee; }
+.cart li button { border: 0; background: none; cursor: pointer; }
+.total { font-size: 18px; }
+#coupon-form { display: flex; gap: 6px; }
+#coupon-form input { flex: 1; padding: 6px 10px; }
