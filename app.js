@@ -131,7 +131,13 @@ search.addEventListener("input", e => {
   state.query = e.target.value;
   render();
 });
-
+search.addEventListener("keydown", e => {
+  if (e.key === "Escape") {
+    search.value = "";
+    state.query = "";
+    render();
+  }
+});
 // ----- category chips -----
 chips.addEventListener("click", e => {
   const chip = e.target.closest(".chip");
