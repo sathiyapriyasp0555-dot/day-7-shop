@@ -36,9 +36,9 @@ const couponMsg = document.querySelector("#coupon-msg");
 function cardHTML(p) {
   const disabled = p.inStock ? "" : "disabled";
   const buttonText = p.inStock ? "Add to cart" : "Out of stock";
-
+const inCart = state.cart.some(item => item.id === p.id);
   return `
-    <li class="card" data-id="${p.id}">
+    <li class="card ${inCart ? "in-cart" : ""}" data-id="${p.id}">
       <h3>${p.name}</h3>
       <p class="cat">${p.category}</p>
       <p class="price">₹${p.price}</p>
