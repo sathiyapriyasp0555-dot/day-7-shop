@@ -1,3 +1,6 @@
+// State is the source of truth. Event handlers update state and call render().
+// render() redraws the products, summary, and cart from that state.
+
 // ----- products -----
 const products = [
   { id: 101, name: "Teak Sofa", category: "living", price: 45000, inStock: true },
@@ -36,7 +39,8 @@ const couponMsg = document.querySelector("#coupon-msg");
 function cardHTML(p) {
   const disabled = p.inStock ? "" : "disabled";
   const buttonText = p.inStock ? "Add to cart" : "Out of stock";
-const inCart = state.cart.some(item => item.id === p.id);
+  const inCart = state.cart.some(item => item.id === p.id);
+
   return `
     <li class="card ${inCart ? "in-cart" : ""}" data-id="${p.id}">
       <h3>${p.name}</h3>
@@ -76,7 +80,9 @@ function renderCart() {
     return `
       <li data-id="${item.id}">
         <span>${product.name} × ${item.qty}</span>
-        <button class="remove" aria-label="Remove ${product.name} from cart">✕</button>
+        <button data-action="decrease" aria-label="Decrease ${product.name} quantity">−</button>
+        <button data-action="increase" aria-label="Increase ${product.name} quantity">+</button>
+        <button class="remove" data-action="remove" aria-label="Remove ${product.name} from cart">✕</button>
       </li>
     `;
   }).join("");
@@ -131,6 +137,7 @@ search.addEventListener("input", e => {
   state.query = e.target.value;
   render();
 });
+
 search.addEventListener("keydown", e => {
   if (e.key === "Escape") {
     search.value = "";
@@ -138,6 +145,7 @@ search.addEventListener("keydown", e => {
     render();
   }
 });
+
 // ----- category chips -----
 chips.addEventListener("click", e => {
   const chip = e.target.closest(".chip");
@@ -153,7 +161,7 @@ sortSelect.addEventListener("change", e => {
   render();
 });
 
-// ----- add products to cart using one grid listener -----
+// ----- add products to cart -----
 grid.addEventListener("click", e => {
   const button = e.target.closest(".add");
   if (!button) return;
@@ -170,13 +178,26 @@ grid.addEventListener("click", e => {
   render();
 });
 
-// ----- remove products from cart -----
+// ----- change quantity or remove cart items -----
 cartList.addEventListener("click", e => {
-  const button = e.target.closest(".remove");
+  const button = e.target.closest("button[data-action]");
   if (!button) return;
 
   const id = Number(button.closest("li").dataset.id);
-  state.cart = state.cart.filter(item => item.id !== id);
+  const action = button.dataset.action;
+
+  if (action === "remove") {
+    state.cart = state.cart.filter(item => item.id !== id);
+  } else {
+    const item = state.cart.find(item => item.id === id);
+    if (!item) return;
+
+    item.qty += action === "increase" ? 1 : -1;
+
+    if (item.qty <= 0) {
+      state.cart = state.cart.filter(item => item.id !== id);
+    }
+  }
 
   render();
 });
@@ -200,5 +221,3 @@ couponForm.addEventListener("submit", e => {
 
 // ----- first render -----
 render();
-// State is the source of truth. Event handlers update state and call render().
-// render() redraws the products, summary, and cart from that state.
