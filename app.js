@@ -34,6 +34,7 @@ const cartCount = document.querySelector("#cart-count");
 const couponForm = document.querySelector("#coupon-form");
 const couponInput = document.querySelector("#coupon");
 const couponMsg = document.querySelector("#coupon-msg");
+const clearCartButton = document.querySelector("#clear-cart");
 
 // ----- make one product card -----
 function cardHTML(p) {
@@ -216,6 +217,12 @@ couponForm.addEventListener("submit", e => {
     couponMsg.textContent = "Invalid coupon";
   }
 
+  render();
+});
+
+// ----- clear cart -----
+clearCartButton.addEventListener("click", () => {
+  state.cart = [];
   render();
 });
 
