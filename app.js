@@ -76,7 +76,7 @@ function renderCart() {
     return `
       <li data-id="${item.id}">
         <span>${product.name} × ${item.qty}</span>
-        <button class="remove">✕</button>
+        <button class="remove" aria-label="Remove ${product.name} from cart">✕</button>
       </li>
     `;
   }).join("");
