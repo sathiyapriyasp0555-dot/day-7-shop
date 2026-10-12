@@ -68,9 +68,15 @@ function renderGrid(list) {
 function renderSummary(list) {
   const inStock = list.filter(p => p.inStock).length;
   const total = list.reduce((sum, p) => sum + p.price, 0);
+  const isFiltered =
+    state.category !== "all" || state.query.trim() !== "";
+
+  const countText = isFiltered
+    ? `Showing ${list.length} of ${products.length} products`
+    : `${list.length} products`;
 
   summary.textContent =
-    `${list.length} products · ${inStock} in stock · Total ₹${total}`;
+    `${countText} · ${inStock} in stock · Total ₹${total}`;
 }
 
 // ----- draw the cart -----
